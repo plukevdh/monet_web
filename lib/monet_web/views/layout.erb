@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= stylesheet_tag "application" %>
+  <%= yield_content :css %>
+  <%= javascript_tag "application" %>
+  <title>Monet</title>
+</head>
+<body>
+  <div id="content">
+    <%= yield %>
+  </div>
+</body>
+</html>

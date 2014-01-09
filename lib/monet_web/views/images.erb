@@ -1,0 +1,41 @@
+<% content_for :css do %>
+  <%= stylesheet_tag "images" %>
+<% end %>
+
+<h1>Images for <%= site %></h1>
+<div id="image-list">
+  <% images.each do |img| %>
+  <div class="image">
+  <h3 class="title"><%= simple_name img.name %></h3>
+    <a class="preview" href="<%= router.baseline_url(img.name) %>">
+      <img src="<%= router.thumbnail_url(img.name) %>" class="thumb <%= "flagged" if img.flagged? %>">
+      <img src="<%= asset_path('view.png') %>" class="over">
+    </a>
+
+    <div class="controls">
+    <% if img.flagged? %>
+      <div class="indicator">
+        <img src="<%= asset_path('warn.png') %>">
+      </div>
+      <div class="actual">
+        <a href="<%= compare_path(site, img.name) %>" class="control compare">
+          <img src="<%= asset_path('compare.png') %>">
+        </a>
+
+        <a href="#swap" class="control swap">
+          <img src="<%= asset_path('swap.png') %>">
+        </a>
+
+        <a href="/reject?path=<%= encode_path img.basename %>" class="control reject">
+          <img src="<%= asset_path('delete.png') %>">
+        </a>
+      </div>
+    <% else %>
+      <img src="<%= asset_path('check.png') %>">
+    <% end %>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<%= javascript_tag "images" %>

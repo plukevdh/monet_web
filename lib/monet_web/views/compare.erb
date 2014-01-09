@@ -1,0 +1,44 @@
+<% content_for :css do %>
+  <%= stylesheet_tag "compare" %>
+<% end %>
+
+<h1>Diff for <%= image_title image.path %></h1>
+
+<a href="<%= path_to_url site %>">Back</a>
+
+<div id="image-list">
+  <div class="image">
+    <h3 class="title">Baseline</h3>
+
+    <a class="preview" href="<%= router.baseline_url(image.name) %>">
+      <img src="<%= router.baseline_url(image.name) %>" class="view original">
+      <img src="<%= asset_path('view.png') %>" class="over">
+    </a>
+
+    <a href="#reject" class="control reject" >
+      <img src="<%= asset_path('check.png') %>">
+    </a>
+  </div>
+
+  <div class="image">
+    <h3 class="title">Diff</h3>
+    <a class="preview" href="<%= router.diff_url(image.name) %>">
+      <img src="<%= router.diff_url(image.name) %>" class="view diff">
+      <img src="<%= asset_path('view.png') %>" class="over">
+    </a>
+  </div>
+
+  <div class="image">
+    <h3 class="title">New</h3>
+    <a class="preview" href="<%= router.capture_url(image.name) %>">
+      <img src="<%= router.capture_url(image.name) %>" class="view new">
+      <img src="<%= asset_path('view.png') %>" class="over">
+    </a>
+
+    <a href="#swap" class="control accept" >
+      <img src="<%= asset_path('check.png') %>">
+    </a>
+  </div>
+</div>
+
+<%= javascript_tag "compare" %>

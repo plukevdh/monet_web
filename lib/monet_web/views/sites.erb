@@ -1,0 +1,6 @@
+<h1>Sites</h1>
+<div id="site-list">
+  <% sites.each do |site| %>
+    <a href="<%= path_to_url site %>"><%= path_to_name site %></a>
+  <% end %>
+</div>

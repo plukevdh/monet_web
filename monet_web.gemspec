@@ -19,6 +19,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "sinatra"
+  spec.add_dependency "sinatra-contrib"
+  spec.add_dependency 'sinatra-asset-pipeline'
   spec.add_dependency "monet"
   spec.add_dependency "redis"
   spec.add_dependency "sidekiq"

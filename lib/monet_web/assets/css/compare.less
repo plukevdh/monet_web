@@ -1,0 +1,28 @@
+@import "images.css";
+
+.image {
+  vertical-align: top;
+  width: 30%;
+
+  .preview {
+    display: inline-block;
+    .view {
+      width: 100%;
+      opacity: 1;
+    }
+
+    &:hover .view {
+      opacity: 0.3;
+    }
+
+    .over {
+      top: 180px !important;
+      left: 90px !important;
+    }
+  }
+
+  .control {
+    display: block;
+    margin-top: 10px;
+  }
+}
