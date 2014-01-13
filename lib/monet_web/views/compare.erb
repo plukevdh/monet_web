@@ -15,9 +15,11 @@
       <img src="<%= asset_path('view.png') %>" class="over">
     </a>
 
-    <a href="#reject" class="control reject" >
-      <img src="<%= asset_path('check.png') %>">
-    </a>
+    <div class="controls">
+      <a href="<%= reject_path(site, image.name) %>" class="control reject" >
+        <img src="<%= asset_path('check.png') %>">
+      </a>
+    </div>
   </div>
 
   <div class="image">
@@ -35,9 +37,11 @@
       <img src="<%= asset_path('view.png') %>" class="over">
     </a>
 
-    <a href="#swap" class="control accept" >
-      <img src="<%= asset_path('check.png') %>">
-    </a>
+    <div class="controls">
+      <a href="<%= accept_path(site, image.name) %>" class="control accept" >
+        <img src="<%= asset_path('check.png') %>">
+      </a>
+    </div>
   </div>
 </div>
 

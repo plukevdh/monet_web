@@ -5,11 +5,7 @@ DEFAULT_OPTIONS = {
   placement: 'bottom'
 }
 
-window.attachTooltip = (el, title) ->
-  opts = $.extend {}, DEFAULT_OPTIONS, {title: title}
+window.attachTooltip = (el, title, options={}) ->
+  opts = $.extend {}, DEFAULT_OPTIONS, {title: title}, options
   $(el).tooltip opts
-
-attachTooltip '.compare img', "Compare Images"
-attachTooltip '.swap img', "Accept new"
-attachTooltip '.reject img', "Reject new"
 

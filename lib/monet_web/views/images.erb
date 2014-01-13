@@ -6,7 +6,7 @@
 <div id="image-list">
   <% images.each do |img| %>
   <div class="image">
-  <h3 class="title"><%= simple_name img.name %></h3>
+  <a href="<%= router.original_url(img.path) %>"><h3 class="title"><%= simple_name img.name %></h3></a>
     <a class="preview" href="<%= router.baseline_url(img.name) %>">
       <img src="<%= router.thumbnail_url(img.name) %>" class="thumb <%= "flagged" if img.flagged? %>">
       <img src="<%= asset_path('view.png') %>" class="over">
@@ -22,11 +22,11 @@
           <img src="<%= asset_path('compare.png') %>">
         </a>
 
-        <a href="#swap" class="control swap">
+        <a href="<%= accept_path(site, img.name) %>" class="control swap">
           <img src="<%= asset_path('swap.png') %>">
         </a>
 
-        <a href="/reject?path=<%= encode_path img.basename %>" class="control reject">
+        <a href="<%= reject_path site, img.name %>" class="control reject">
           <img src="<%= asset_path('delete.png') %>">
         </a>
       </div>
