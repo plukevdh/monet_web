@@ -48,8 +48,13 @@ module MonetWeb
       File.basename(path, ".png").gsub(SIZE_MATCHER, "").gsub("|", "/")
     end
 
+    def truncate(string, max=35)
+      return string unless (string.length > max)
+      string[0..max-3] + "..."
+    end
+
     def simple_name(name)
-      name.split("|").last.split("-").first
+      truncate name.split("|").last.gsub(/-(\d+)\.png/, "")
     end
 
     def compare_path(site, name)
