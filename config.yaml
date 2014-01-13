@@ -6,11 +6,8 @@
 :baseline_dir: "./public/baselines"
 :thumbnail_dir: "./public/thumbnails"
 
-:base_url: "http://lance.com"
+:base_url: "http://staging.lance.com"
 
 :thumbnail: true
 :compare_type: Highlight
-:map:
-  - "/"
-  - "/aboutus"
-  - "/littleleague"
+:map: :spider
