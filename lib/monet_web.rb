@@ -48,24 +48,37 @@ module MonetWeb
       File.basename(path, ".png").gsub(SIZE_MATCHER, "").gsub("|", "/")
     end
 
-    def encode_path(path)
-      CGI::escape path
-    end
-
-    def decode_path(path)
-      CGI::unescape path
-    end
-
     def simple_name(name)
       name.split("|").last.split("-").first
     end
 
     def compare_path(site, name)
-      "/#{site}/compare/#{name.gsub(".png", "")}"
+      "/#{site}/compare/#{url_name name}"
+    end
+
+    def reject_path(site, name)
+      "/#{site}/reject/#{url_name name}"
+    end
+
+    def accept_path(site, name)
+      "/#{site}/accept/#{url_name name}"
+    end
+
+    def url_name(path)
+      path.gsub(".png", "")
+    end
+
+    def reimagerize(name)
+      image_path = router.baseline_dir("#{name}.png")
+      Monet::Image.new(image_path)
     end
 
     def router
       @router ||= Monet::Router.new config
+    end
+
+    def baseline_control
+      @basenline_control ||= Monet::BaselineControl.new config
     end
 
     get "/" do
@@ -78,13 +91,22 @@ module MonetWeb
 
     get "/:site/compare/:name" do |site, name|
       image_path = router.baseline_dir("#{name}.png")
-      erb :compare, locals: { image: Monet::Image.new(image_path), site: site }
+      erb :compare, locals: { image: reimagerize(name), site: site }
     end
 
-    get "/reject" do
-      path = decode_path params[:path]
-      settings.baseline_control.discard path
+    get "/:site/reject/:name" do |site, name|
+      img = reimagerize(name)
+      baseline_control.discard router.capture_dir(img.name)
+      baseline_control.discard router.diff_dir(img.name)
 
+      redirect "/site/#{site}"
+    end
+
+    get "/:site/accept/:name" do |site, name|
+      img = reimagerize(name)
+      baseline_control.baseline router.capture_dir(img.name)
+
+      redirect "/site/#{site}"
     end
   end
 end
