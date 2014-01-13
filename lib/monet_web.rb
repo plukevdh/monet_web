@@ -6,6 +6,9 @@ require "sinatra/base"
 require "sinatra/content_for"
 require 'sinatra/asset_pipeline'
 
+require 'coffee_script'
+require 'less'
+
 require 'monet'
 
 module MonetWeb
