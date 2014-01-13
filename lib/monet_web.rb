@@ -14,23 +14,25 @@ require 'monet'
 module MonetWeb
   class App < Sinatra::Base
     set :root, File.join(File.dirname(__FILE__), "monet_web")
-    set :config, Monet::Config.load
     set :public_folder, File.join(File.dirname(__FILE__), "..", "public")
-
     set :assets_prefix, %w(lib/monet_web/assets vendor/assets bower_components/**)
-    set :baseline_control, Monet::BaselineControl.new(config)
 
     register Sinatra::AssetPipeline
     helpers Sinatra::ContentFor
 
     SIZE_MATCHER = /-(?<size>\d+)$/
 
+    def config
+      raise "Please set MonetWeb::App config via `MonetWeb::App.set :config, [String|Monet::Config]`" unless defined?(settings.config)
+      @config ||= (settings.config.is_a? String) ? Monet::Config.load(settings.config) : settings.config
+    end
+
     def sites
-      Dir.glob File.join(settings.config.baseline_dir, "*")
+      Dir.glob File.join(config.baseline_dir, "*")
     end
 
     def images_for_site(site)
-      paths = Dir.glob(File.join(settings.config.baseline_dir, site, "*.png")).reject {|img| img.include? "-diff.png" }
+      paths = Dir.glob(File.join(config.baseline_dir, site, "*.png")).reject {|img| img.include? "-diff.png" }
       paths.map {|path| Monet::Image.new path }
     end
 
@@ -63,7 +65,7 @@ module MonetWeb
     end
 
     def router
-      @router ||= Monet::Router.new settings.config
+      @router ||= Monet::Router.new config
     end
 
     get "/" do
