@@ -86,6 +86,18 @@ module MonetWeb
       @basenline_control ||= Monet::BaselineControl.new config
     end
 
+    def page_log
+      @log ||= Monet::PageLogger.load "./spider.txt"
+    end
+
+    def errored?(url)
+      page_log.failed?(url)
+    end
+
+    def error_code(url)
+      page_log.status_for(url)
+    end
+
     get "/" do
       erb :sites, names: sites
     end

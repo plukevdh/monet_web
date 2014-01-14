@@ -30,6 +30,8 @@
           <img src="<%= asset_path('delete.png') %>">
         </a>
       </div>
+    <% elsif errored? router.original_url(img.path) %>
+      <img src="<%= asset_path('x.png') %>" class="errored" data-title="<%= error_code router.original_url(img.path) %>">
     <% else %>
       <img src="<%= asset_path('check.png') %>">
     <% end %>
