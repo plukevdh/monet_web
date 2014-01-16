@@ -1,5 +1,5 @@
-#= require jquery
-#= require bootstrap
+#= require jquery.js
+#= require bootstrap.js
 
 DEFAULT_OPTIONS = {
   placement: 'bottom'
