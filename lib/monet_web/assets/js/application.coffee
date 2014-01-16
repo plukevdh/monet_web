@@ -1,4 +1,4 @@
-#= require 'jquery'
+#= require jquery
 #= require bootstrap
 
 DEFAULT_OPTIONS = {
