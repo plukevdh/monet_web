@@ -16,6 +16,13 @@ module MonetWeb
     set :root, File.join(File.dirname(__FILE__), "monet_web")
     set :public_folder, File.join(File.dirname(__FILE__), "..", "public")
     set :assets_prefix, %w(lib/monet_web/assets vendor/assets bower_components/**)
+    set :assets_precompile, %w(
+      application.css application.js
+      compare.css compare.js
+      images.js images.css
+      *.png *.jpg *.svg *.eot *.ttf *.woff
+    )
+
 
     register Sinatra::AssetPipeline
     helpers Sinatra::ContentFor
