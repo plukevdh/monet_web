@@ -1,0 +1,14 @@
+<% content_for :css do %>
+  <%= stylesheet_tag "debug" %>
+<% end %>
+
+<h1>Debug for <%= site %></h1>
+<div id="image-list">
+  <% images.each do |img| %>
+  <div class="image">
+    <a href="<%= router.original_url(img.path) %>"><h3 class="title"><%= simple_name img.name %></h3></a>
+    <img src="<%= router.baseline_url(img.name) %>" class="original">
+    <img src="<%= router.thumbnail_url(img.name) %>" class="thumb">
+  </div>
+  <% end %>
+</div>

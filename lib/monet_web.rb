@@ -23,7 +23,6 @@ module MonetWeb
       *.png *.jpg *.svg *.eot *.ttf *.woff
     )
 
-
     register Sinatra::AssetPipeline
     helpers Sinatra::ContentFor
 
@@ -131,6 +130,10 @@ module MonetWeb
       baseline_control.baseline router.capture_dir(img.name)
 
       redirect "/site/#{site}"
+    end
+
+    get "/site/:site/debug" do |site|
+      erb :debug, locals: { images: images_for_site(site), site: site }
     end
   end
 end
