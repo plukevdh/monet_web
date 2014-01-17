@@ -20,6 +20,7 @@ module MonetWeb
       application.css application.js
       compare.css compare.js
       images.js images.css
+      debug.css
       *.png *.jpg *.svg *.eot *.ttf *.woff
     )
 
